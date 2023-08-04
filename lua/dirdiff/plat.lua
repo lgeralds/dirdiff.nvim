@@ -24,7 +24,7 @@ function M.path_parent(path)
     return
   end
 
-  local temp = vim.split(path, path_sep, true)
+  local temp = vim.split(path, path_sep, { trimempty = true })
   if #temp == 1 then
     return ""
   end
@@ -47,7 +47,6 @@ M.parse_arg = function(...)
 end
 
 M.cmdcomplete = function(A, _L, _P)
-  print('TEST THING')
   local cwd = vim.fn.getcwd()
   if #A == 0 then
     return { cwd }
