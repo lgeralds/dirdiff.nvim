@@ -186,8 +186,6 @@ end
 
 function M:show()
   float_win:create_float_win(M.float_buf_id)
-  -- hide diagnostic test
-  vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
 end
 
 function M:close_win()
