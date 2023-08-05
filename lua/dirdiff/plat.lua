@@ -70,4 +70,21 @@ M.cmdcomplete = function(A, _L, _P)
   return ret
 end
 
+M.fetchNodeName = function(file_src, cmdLine)
+  local file_out = ''
+  -- Read in the new file path using the existing file's path as the baseline.
+  vim.ui.input(
+    {
+      prompt = cmdLine,
+      completion = 'file',
+      default = file_src
+    },
+    function(input)
+      file_out = input
+    end
+  )
+
+  return file_out
+end
+
 return M

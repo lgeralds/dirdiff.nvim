@@ -23,6 +23,8 @@ hi DirDiffRemove guifg=#E06C75
 command -nargs=+ -complete=customlist,v:lua.dirdiff.cmdcomplete DDiff call v:lua.dirdiff.diff_dir(v:false, <f-args>)
 command -nargs=+ -complete=customlist,v:lua.dirdiff.cmdcomplete DDiffRec call v:lua.dirdiff.diff_dir(v:true, <f-args>)
 
+command -nargs=+ -complete=customlist,v:lua.vim.ui.input DDfr call v:lua.dirdiff.diff_dir(v:true, <f-args>)
+
 command DResume call v:lua.dirdiff.show()
 
 command DClose call v:lua.dirdiff.close()

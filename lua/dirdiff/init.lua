@@ -47,6 +47,12 @@ end
 M.cmdcomplete = function(A, L, P)
   plat = plat or require('dirdiff.plat')
   return plat.cmdcomplete(A, L, P)
+  --
+  -- print('A: ' .. A)
+  -- print('L: ' .. L)
+  -- print('P: ' .. P)
+
+  -- return plat.fetchNodeName(A, L)
 end
 
 return M
