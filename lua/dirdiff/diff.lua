@@ -25,7 +25,7 @@ end
 
 local function is_equal_file(mine_file, other_file)
   local mine_len = vim.fn.getfsize(mine_file)
-  -- 只判断文件类型
+  -- 只判断文件类型 -- Only the file type is judged
   if mine_len <= 0 then
     return false
   end
@@ -54,6 +54,9 @@ local function is_equal_file(mine_file, other_file)
 end
 
 local function is_equal_dir(mine_dir, other_dir)
+  if mine_dir == other_dir then
+    return true
+  end
   local mine_files = get_files(mine_dir, true)
   local other_files = get_files(other_dir, true)
   if #mine_files ~= #other_files then
