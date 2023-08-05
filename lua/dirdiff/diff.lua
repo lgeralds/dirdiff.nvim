@@ -26,9 +26,9 @@ end
 local function is_equal_file(mine_file, other_file)
   local mine_len = vim.fn.getfsize(mine_file)
   -- 只判断文件类型 -- Only the file type is judged
-  if mine_len <= 0 then
-    return false
-  end
+  -- if mine_len <= 0 then
+  --   return false
+  -- end
   if mine_len ~= vim.fn.getfsize(other_file) then
     return false
   end
@@ -52,6 +52,12 @@ local function is_equal_file(mine_file, other_file)
 
   return true
 end
+
+-- local function diff_file(mine_file, other_file)
+--   -- os.execute("c:\\temp\\program.exe")
+--   -- io.popen (prog [, mode])
+--   return false
+-- end
 
 local function is_equal_dir(mine_dir, other_dir)
   if mine_dir == other_dir then
@@ -92,7 +98,7 @@ M.diff_dir = function(mine, others, is_rec)
       table.insert(diff_add, file)
     elseif ft ~= other_ft then
       table.insert(diff_change, file)
-    elseif ft == "dir" then
+    elseif ft == 'dir' then
       if not is_equal_dir(plat.path_concat(mine, file), plat.path_concat(others, file)) then
         table.insert(diff_change, file)
       end

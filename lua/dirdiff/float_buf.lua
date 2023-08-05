@@ -83,10 +83,21 @@ end
 function M:init_float_buf()
   if self.float_buf_id == 0 then
     self.float_buf_id = api.nvim_create_buf(false, true)
-    api.nvim_buf_set_keymap(self.float_buf_id, 'n', '<cr>',
-      ":lua require('dirdiff').diff_cur()<cr>", { silent = true })
-    api.nvim_buf_set_keymap(self.float_buf_id, 'n', '<esc>',
-      ":lua require('dirdiff').close_win()<cr>", { silent = true })
+    api.nvim_buf_set_keymap(
+      self.float_buf_id, 'n', '<cr>',
+      ":lua require('dirdiff').diff_cur()<cr>",
+      { silent = true }
+    )
+    api.nvim_buf_set_keymap(
+      self.float_buf_id, 'n', '<esc>',
+      ":lua require('dirdiff').close_win()<cr>",
+      { silent = true }
+    )
+    api.nvim_buf_set_keymap(
+      self.float_buf_id, 'n', 'q',
+      ":lua require('dirdiff').close_win()<cr>",
+      { silent = true }
+    )
   else
     api.nvim_buf_clear_namespace(self.float_buf_id, -1, 0, -1)
     api.nvim_buf_set_lines(self.float_buf_id, 0, -1, false, {})
@@ -95,10 +106,11 @@ end
 
 function M:set_float_buf()
   self:init_float_buf()
-  local buf_lines = { "../" }
+  local buf_lines = { 'TOP' }
   local diff = self.diff_info.diff
   if self.showed_diff ~= "" then
     diff = self.diff_info.sub[self.showed_diff]
+    buf_lines = { '...' .. string.sub(self.diff_info.mine_root, -20) .. '/' .. self.showed_diff }
   end
   self:add_lines(buf_lines, diff.change, "~")
   self:add_lines(buf_lines, diff.add, "+")

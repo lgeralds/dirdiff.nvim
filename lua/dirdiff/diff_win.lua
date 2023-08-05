@@ -53,13 +53,13 @@ function M:create_diff_view(mine, other)
     self:create_buf_view(mine, 'l')
   }
   -- hide diagnostic text
-  print('HIDING')
+  -- print('HIDING')
   vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
 end
 
 function M:create_buf_view(content, placement)
   api.nvim_command('wincmd ' .. placement)
-  api.nvim_command('e ' .. content)
+  api.nvim_command('edit ' .. content)
   api.nvim_command('diffthis')
   api.nvim_win_set_option(
     api.nvim_get_current_win(),
