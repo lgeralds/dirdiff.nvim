@@ -17,7 +17,9 @@ function M:close_all_tab()
   for i, bufs in pairs(self.tab_buf) do
     self.tab_buf[i] = {}
     for _, buf in ipairs(bufs) do
-      api.nvim_command("bd " .. buf)
+      if api.nvim_buf_is_valid(buf) then
+        api.nvim_buf_delete(buf, {})
+      end
     end
   end
 end
